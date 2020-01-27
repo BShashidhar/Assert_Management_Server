@@ -1,6 +1,6 @@
-const {sequelize, DataTypes} = require('../config/db')
+const { sequelize, DataTypes } = require('../config/db')
 
-const Category = sequelize.define('category',{
+const Category = sequelize.define('category', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -9,10 +9,14 @@ const Category = sequelize.define('category',{
     name: {
         type: DataTypes.STRING(30),
         allowNull: false
+    },
+    delete_flag: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
-},{
+}, {
     timestamps: false,
-    freezeTableName : true
+    freezeTableName: true
 })
 
 module.exports = Category

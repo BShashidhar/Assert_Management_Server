@@ -1,6 +1,6 @@
-const {sequelize, DataTypes} = require('../config/db')
+const { sequelize, DataTypes } = require('../config/db')
 
-const Mrrpo= sequelize.define('mrrpo', {
+const Mrrpo = sequelize.define('mrrpo', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -20,7 +20,7 @@ const Mrrpo= sequelize.define('mrrpo', {
     },
     poF_no: {
         type: DataTypes.STRING(50),
-        allowNull:false
+        allowNull: false
     },
     poF_date: {
         type: DataTypes.DATE,
@@ -61,11 +61,15 @@ const Mrrpo= sequelize.define('mrrpo', {
     value: {
         type: DataTypes.INTEGER,
         allowNull: true
+    },
+    delete_flag: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 },
-{
-    timestamps: false,
-    freezeTableName : true
-})
+    {
+        timestamps: false,
+        freezeTableName: true
+    })
 
 module.exports = Mrrpo

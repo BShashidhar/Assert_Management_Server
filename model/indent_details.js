@@ -1,4 +1,4 @@
-const {sequelize, DataTypes} = require('../config/db')
+const { sequelize, DataTypes } = require('../config/db')
 
 const Status = require('./status')
 
@@ -61,16 +61,16 @@ const IndentDetails = sequelize.define('indent_details', {
         defaultValue: sequelize.literal("NOW()")
     },
     updated_at: {
-        type:DataTypes.DATE,
+        type: DataTypes.DATE,
         defaultValue: sequelize.literal("NOW()")
     },
-    flag: {
+    delete_flag: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     }
-},{
+}, {
     timestamps: false,
-    freezeTableName : true
+    freezeTableName: true
 })
 
 module.exports = IndentDetails

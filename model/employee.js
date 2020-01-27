@@ -1,4 +1,4 @@
-const {sequelize, DataTypes} = require('../config/db')
+const { sequelize, DataTypes } = require('../config/db')
 
 const Employee = sequelize.define('employee', {
     id: {
@@ -39,13 +39,13 @@ const Employee = sequelize.define('employee', {
             key: "id"
         }
     },
-    flag: {
+    delete_flag: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     }
-},{
+}, {
     timestamps: false,
-    freezeTableName : true
+    freezeTableName: true
 })
 
 module.exports = Employee

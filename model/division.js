@@ -1,4 +1,4 @@
-const {sequelize, DataTypes} = require('../config/db')
+const { sequelize, DataTypes } = require('../config/db')
 
 const Division = sequelize.define('division', {
     id: {
@@ -9,10 +9,14 @@ const Division = sequelize.define('division', {
     name: {
         type: DataTypes.STRING(10),
         allowNull: false
+    },
+    delete_flag: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
-},{
+}, {
     timestamps: false,
-    freezeTableName : true
+    freezeTableName: true
 })
 
 module.exports = Division

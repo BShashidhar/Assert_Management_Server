@@ -4,7 +4,7 @@ const { getAllAsset, addAsset, getAssetById, updateAsset, deleteAsset, getNumber
 
 router.get('/getAll', getAllAsset);
 
-router.get('/',getAssetById)
+router.post('/',getAssetById)
 
 router.post('/add', addAsset);
 

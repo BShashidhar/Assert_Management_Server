@@ -1,6 +1,6 @@
-const {sequelize, DataTypes} = require('../config/db')
+const { sequelize, DataTypes } = require('../config/db')
 
-const AssetGroup = sequelize.define('asset_group',{
+const AssetGroup = sequelize.define('asset_group', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -13,14 +13,18 @@ const AssetGroup = sequelize.define('asset_group',{
     subcategory_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references:{
+        references: {
             model: "subcategory",
             key: "id"
         }
+    },
+    delete_flag: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
-},{
+}, {
     timestamps: false,
-    freezeTableName : true
+    freezeTableName: true
 })
 
 module.exports = AssetGroup

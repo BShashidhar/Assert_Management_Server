@@ -1,4 +1,4 @@
-const {sequelize, DataTypes} = require('../config/db')
+const { sequelize, DataTypes } = require('../config/db')
 
 const Department = sequelize.define('department', {
     id: {
@@ -9,10 +9,14 @@ const Department = sequelize.define('department', {
     name: {
         type: DataTypes.STRING(30),
         allowNull: false
+    },
+    delete_flag: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
-},{
+}, {
     timestamps: false,
-    freezeTableName : true
+    freezeTableName: true
 })
 
 module.exports = Department

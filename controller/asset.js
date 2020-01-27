@@ -2,6 +2,7 @@ const Asset = require('../model/asset')
 const AssetPeripherals = require('../model/asset_peripherals')
 const Peripherals = require('../model/peripherals')
 const { Op } = require('sequelize')
+const { getDataWithQuery, getAssetDetailsByAssetId } = require('../config/properties')
 
 module.exports = {
     addAsset: (req, res) => {
@@ -85,14 +86,34 @@ module.exports = {
             })
     },
 
-    getAssetById: (req, res) => {
-        Asset.findOne({ where: { id: req.query.id } })
-            .then(result => {
-                res.status(200).json({ result: result })
-            })
-            .catch(err => {
-                res.status(500).json({ result: err.message })
-            })
+    // getAssetById: (req, res) => {
+    //     Asset.findOne({ where: { id: req.query.id } })
+    //         .then(result => {
+    //             res.status(200).json({ result: result })
+    //         })
+    //         .catch(err => {
+    //             res.status(500).json({ result: err.message })
+    //         })
+    // },
+    getAssetById: async (req, res) => {
+        var asset_id = req.body.asset_id;
+        var projectName = null;
+        await Asset.findOne({
+            attributes: ['project_id'],
+            where: { asset_id }
+        }).then(asset => {
+            if (asset.project_id != null) {
+                Project.findOne({
+                    where: { id: asset.project_id }
+                }).then(project => {
+                    projectName = project.name
+                })
+            }
+        });
+        var result = await getDataWithQuery(getAssetDetailsByAssetId, { asset_id });
+        if(projectName != null) result[0]['project'] = projectName;
+        res.status(200).json(result[0])
+
     },
 
     updateAsset: (req, res) => {

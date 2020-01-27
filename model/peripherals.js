@@ -1,6 +1,6 @@
-const {sequelize, DataTypes} = require('../config/db')
+const { sequelize, DataTypes } = require('../config/db')
 
-const Peripherals = sequelize.define('peripherals',{
+const Peripherals = sequelize.define('peripherals', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -17,10 +17,14 @@ const Peripherals = sequelize.define('peripherals',{
     peripheral_key: {
         type: DataTypes.STRING(10),
         allowNull: false
+    },
+    delete_flag: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
-},{
+}, {
     timestamps: false,
-    freezeTableName : true
+    freezeTableName: true
 })
 
 module.exports = Peripherals

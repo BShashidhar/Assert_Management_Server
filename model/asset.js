@@ -140,6 +140,10 @@ const Asset = sequelize.define('asset', {
     },
     remark: {
         type: DataTypes.STRING(300)
+    },
+    delete_flag: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 },{
     timestamps: false,

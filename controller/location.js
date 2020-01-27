@@ -1,46 +1,51 @@
 const Location = require('../model/location');
 
+function addLocation(req, res) {
+    Location.create({
+        name: req.body.location_name
+    }).then(row => {
+        getAllLocation(req, res)
+    }).catch(err => {
+        res.status(500).json({ result: err })
+    })
+}
+
+function getAllLocation(req, res) {
+    Location.findAll({
+        where: { delete_flag: false }
+    }).then(result => {
+        res.status(200).json({ result: result })
+    }).catch(err => {
+        res.status(500).json({ result: err })
+    })
+}
+
+function updateLocation(req, res) {
+    Location.update(
+        { name: req.body.location_name },
+        { where: { id: req.body.location_id } }
+    ).then(() => {
+        getAllLocation(req, res)
+    }).catch(err => {
+        res.status(500).json({ result: err })
+    })
+}
+
+function deleteLocation(req, res) {
+    Location.update({
+        delete_flag: true
+    }, {
+        where: { id: req.body.location_id }
+    }).then(() => {
+        getAllLocation(req, res)
+    }).catch(err => {
+        res.status(500).json({ result: err })
+    })
+}
+
 module.exports = {
-    addLocation: (req, res) => {
-        Location.create({
-            name: req.body.location_name
-        }).then(row => {
-            Location.findAll().then(data => {
-                res.status(200).json({ result: data })
-            })
-        }).catch(err => {
-            res.status(500).json({ result: err })
-        })
-    },
-
-    getAllLocation: (req, res) => {
-        Location.findAll()
-            .then(result => {
-                res.status(200).json({ result: result })
-            })
-            .catch(err => {
-                res.status(500).json({ result: err })
-            })
-    },
-
-    updateLocation: (req, res) => {
-        Location.update(
-            { name: req.body.location_name },
-            { where: { id: req.body.location_id } }
-        ).then(count => { return Location.findAll() }).then(result => {
-            res.status(200).json({ result: result })
-        }).catch(err => {
-            res.status(500).json({ result: err })
-        })
-    },
-
-    deleteLocation: (req, res) => {
-        Location.destroy({
-            where: { id: req.body.location_id }
-        }).then(result => {
-            Location.findAll().then(data => { res.status(200).json({ result: data }) })
-        }).catch(err => {
-            res.status(500).json({ result: err })
-        })
-    }
+    addLocation: addLocation,
+    getAllLocation: getAllLocation,
+    updateLocation: updateLocation,
+    deleteLocation: deleteLocation
 }

@@ -1,6 +1,6 @@
 const { sequelize, DataTypes } = require('../config/db')
 
-const  Vendor= sequelize.define('vendor', {
+const Vendor = sequelize.define('vendor', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -9,6 +9,10 @@ const  Vendor= sequelize.define('vendor', {
     name: {
         type: DataTypes.STRING(100),
         allowNull: true
+    },
+    delete_flag: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 }, {
     timestamps: false,

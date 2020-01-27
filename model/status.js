@@ -1,4 +1,4 @@
-const {sequelize, DataTypes} = require('../config/db')
+const { sequelize, DataTypes } = require('../config/db')
 
 const Status = sequelize.define('status', {
     id: {
@@ -9,10 +9,14 @@ const Status = sequelize.define('status', {
     name: {
         type: DataTypes.STRING(30),
         allowNull: false
+    },
+    delete_flag: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
-},{
+}, {
     timestamps: false,
-    freezeTableName : true
+    freezeTableName: true
 })
 
 module.exports = Status

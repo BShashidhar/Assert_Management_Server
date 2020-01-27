@@ -1,6 +1,6 @@
-const {sequelize, DataTypes} = require('../config/db')
+const { sequelize, DataTypes } = require('../config/db')
 
-const Subcategory = sequelize.define('subcategory',{
+const Subcategory = sequelize.define('subcategory', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -17,14 +17,18 @@ const Subcategory = sequelize.define('subcategory',{
     category_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references:{
+        references: {
             model: "category",
             key: "id"
         }
+    },
+    delete_flag: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
-},{
+}, {
     timestamps: false,
-    freezeTableName : true
+    freezeTableName: true
 })
 
 module.exports = Subcategory
